@@ -83,13 +83,13 @@ class CountdownTimerController extends ChangeNotifier {
     int? days, hours, min;
 
     ///Calculate the number of days remaining.
-    if (remainingTimeStamp >= _daySecond.abs()) {
+    if (remainingTimeStamp.abs() >= _daySecond) {
       days = remainingTimeStamp ~/ _daySecond;
       remainingTimeStamp %= _daySecond;
     }
 
     ///Calculate remaining hours.
-    if (remainingTimeStamp >= _hourSecond.abs()) {
+    if (remainingTimeStamp.abs() >= _hourSecond) {
       hours = remainingTimeStamp ~/ _hourSecond;
       remainingTimeStamp %= _hourSecond;
     } else if (days != null) {
@@ -97,7 +97,7 @@ class CountdownTimerController extends ChangeNotifier {
     }
 
     ///Calculate remaining minutes.
-    if (remainingTimeStamp >= _minuteSecond.abs()) {
+    if (remainingTimeStamp.abs() >= _minuteSecond) {
       min = remainingTimeStamp ~/ _minuteSecond;
       remainingTimeStamp %= _minuteSecond;
     } else if (hours != null) {
