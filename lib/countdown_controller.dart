@@ -72,7 +72,7 @@ class CountdownController extends ValueNotifier<int> {
 
   _diffTime(Duration duration) {
     value = max(value - duration.inMilliseconds, 0);
-    _lastTimestamp = DateTime.now().millisecond;
+    _lastTimestamp = DateTime.now().millisecondsSinceEpoch;
     if (value <= 0) {
       stop();
       onEnd?.call();
@@ -83,7 +83,7 @@ class CountdownController extends ValueNotifier<int> {
   ///pause
   stop() {
     if (_lastTimestamp != null && value > 0) {
-      _lostTime = DateTime.now().millisecond - _lastTimestamp!;
+      _lostTime = DateTime.now().millisecondsSinceEpoch - _lastTimestamp!;
     }
     _dispose();
   }
