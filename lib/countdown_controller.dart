@@ -54,21 +54,15 @@ class CountdownController extends ValueNotifier<int> {
     if (value <= 0) return;
     _dispose();
 
-    _diffTime(Duration.zero);
-    Duration duration = _getDuration();
-    if (duration == stepDuration) {
-      _diffTimer = Timer.periodic(stepDuration, (Timer timer) {
-        _diffTime(stepDuration);
-      });
-    } else {
-      Future.delayed(duration, () {
-        _diffTime(duration);
-        _diffTimer = Timer.periodic(stepDuration, (Timer timer) {
-          _diffTime(stepDuration);
-        });
-      });
-    }
+    // First tick: emit current value without subtracting
+    notifyListeners(); // update UI immediately
+
+    // Start periodic timer
+    _diffTimer = Timer.periodic(stepDuration, (Timer timer) {
+      _diffTime(stepDuration);
+    });
   }
+
 
   _diffTime(Duration duration) {
     value = max(value - duration.inMilliseconds, 0);
