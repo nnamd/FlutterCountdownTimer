@@ -63,10 +63,10 @@ class CountdownTimerController extends ChangeNotifier {
 
   ///Check if the countdown is over and issue a notification.
   _countdownPeriodicEvent() {
-    _currentRemainingTime = _calculateCurrentRemainingTime();
-    print(_currentRemainingTime);
-    _animationController?.reverse(from: 1);
     notifyListeners();
+    _currentRemainingTime = _calculateCurrentRemainingTime();
+    //print(_currentRemainingTime);
+    _animationController?.reverse(from: 1);
     if (_currentRemainingTime == null) {
       onEnd?.call();
       disposeTimer();
