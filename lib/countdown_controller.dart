@@ -53,6 +53,8 @@ class CountdownController extends ValueNotifier<int> {
   start() {
     if (value <= 0) return;
     _dispose();
+
+    _diffTime(Duration.zero);
     Duration duration = _getDuration();
     if (duration == stepDuration) {
       _diffTimer = Timer.periodic(stepDuration, (Timer timer) {
